@@ -34,7 +34,6 @@
   \fi}
 \makeatother
 
-\parindent=0cm
 
 
 \begin{document}
@@ -120,14 +119,20 @@ The first type of transformer consists in connecting three single-phase transfor
 
 The second type of three-phase transformers are ones for which the core is shared for the three phases. Thus, this implies that the phases are coupled together.
 
-Also, the "volume of this common core is smaller than three times the volume of a single core"\footnote{\url{http://www.montefiore.ulg.ac.be/~vct/elec0014/transp-t.pdf}}.\\
+Also, the "volume of this common core is smaller than three times the volume of a single core"\footnote{\url{http://www.montefiore.ulg.ac.be/~vct/elec0014/transp-t.pdf}}.
 
 In this project, the magnetic material used for the core is soft iron for which the saturation induction is around 2T. Also, since it has been said that three individuals core were more suitable for big transformers, transformer \textbf{B} will be design in this way.
 
 \section{Choice of the three-phase transformer connections}
 \quad\, Once the core(s) is(are) designed, the second step is to make a decision regarding to the type of connection of the different phases. Basically, considering one side of the transformer, the winding can either be connected in \textcolor{red}{star} or \textcolor{green}{delta}.
 
-The star connection 
+The star connection consists in connecting each of three phases to a common nodes which is usually grounded. The star connection is depicted on Figure \ref{fig:star}.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{star.png}
+    \caption{Three phase device - Star connection}
+    \label{fig:star}
+\end{figure}
 There are four basic configurations of a three-phase transformer, depending on if the primary or secondary windings are delta- or star-connected. Note that the winding connection options are the same whether using just one three-phase transformer or three separate single phase transformers.
 \begin{itemize}
     \item Y-Y :
