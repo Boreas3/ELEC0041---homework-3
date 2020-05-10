@@ -87,40 +87,49 @@ Academic year: 2019-2020
     \label{fig:real_transformer}
 \end{figure}
 \newpage
-\section{Characteristic of the transformers}
-Here, the study of two transformers, respectively named \textbf{A} and \textbf{B}) of two different sizes will be considered in this report. The first one is a small transformer that makes the voltage going from 2.4 kV to 240 V for a nominal power of 200 kVA. Defining the transformer ratio $n$ as being the ratio between the high and the low voltage values, For this transformer, the transformer ratio is equal to 
-\begin{equation}
-    n_A = \frac{2400}{240} = 10
-\end{equation}
-The second transformer is bigger since it works between the 60 kV and 2.4 kV (leading to a transformer ratio of 25). The nominal power of this transformer is equal to 20,000 KV.
+\chapter{Upstream analysis}
+In this chapter will be introduced all the required elements to conduct the analysis of the studied three-phase transformers. Here, two transformers, respectively named \textbf{A} and \textbf{B}), of two different sizes will be considered in this report. The first one is a small transformer that makes the voltage going from 2.4 kV to 240 V for a nominal apparent power of 200 kVA. Let's define the transformer ratio $N$ as being the ratio between the secondary and the primary terminal voltage values. For this transformer, the transformer ratio is equal to 
 
-These characteristics supposed that the network is at 50 Hz. Those are summarized in Table \ref{tab:caracteristics_transfo}.
+\begin{equation}
+\setstretch{1}
+    N_A = \frac{240}{2400}\cdot 100 = 10\%
+\end{equation}
+
+The second transformer is bigger since it works between the 60 kV and 2.4 kV (leading to a transformer ratio of 4\%). The nominal apparent power of this transformer is equal to 20,000 KV.
+
+These characteristics supposed that the network is at 50 Hz. Those are summarized in Table \ref{tab:characteristics_transfo}.
 
 \begin{table}[h]
     \centering
-\begin{tabular}{|l|l|l|}
-  \hline
-   & \textbf{Type A} &\textbf{Type B}\\
-  \hline
-    Input voltage [V]& 2400 & 60000\\\hline
-    Output voltage [V] & 240 & 2400\\\hline
-    Output power [kVA] & 200 & 20000\\\hline
-    Frequency [Hz] & \multicolumn{2}{c|}{50}\\
-  \hline
+\begin{tabular}{l|ll}
+Transformer type   & \textbf{A}             & \textbf{B} \\ \hline
+Input voltage [V]  & 2400                   & 60000      \\
+Output voltage [V] & 240                    & 2400       \\
+Output power [kVA] & 200                    & 20000      \\
+Frequency [Hz]     & \multicolumn{1}{c}{50} & 50        
 \end{tabular}
     \caption{Specifications of the two three-phase transformers}
-    \label{tab:caracteristics_transfo}
+    \label{tab:characteristics_transfo}
 \end{table}
 
-In the statement of the project, there is no information about if the given voltages are phase-to-phase or phase-to-neutral. Also, it is not indicated if those are peak or RMS values. Therefore, it will be assumed that the speficied voltage are phase-to-phase RMS voltage.
+In the statement of the project, there is no information about if the given voltages are phase-to-phase or phase-to-neutral. Also, it is not indicated if those are peak or RMS values. Therefore, it will be assumed that the specified voltage are phase-to-phase RMS voltage.
+
+Therefore, the nominal apparent power $S_N$ is defined as follows
+
+\begin{equation}
+\setstretch{1}
+    S_N = \sqrt{3}\cdot U_N\cdot I_N
+\end{equation}
+
+where $U_N$ is the nominal phase-to-phase voltage (RMS value) and $I_N$ is the nominal current (RMS value).
 \section{Type of three-phase transformer}
 \quad\, When considering a three phase transformer, several configurations regarding to the construction of the core.
 
-The first type of transformer consists in connecting three single-phase transformers together. This configuration is suitable for transformers of large nominal power. Also, "in case of failure of one of the transformers, only that transformer is replaced"\footnote{\url{http://www.montefiore.ulg.ac.be/~vct/elec0014/transp-t.pdf}}. It is also easier to carry.\\
+The first type of transformer consists in connecting three single-phase transformers together. This configuration is suitable for transformers of large nominal power. Also, "in case of failure of one of the transformers, only that transformer is replaced"\footnote{\url{http://www.montefiore.ulg.ac.be/~vct/elec0014/transp-t.pdf}}. It is also easier to carry.
 
 The second type of three-phase transformers are ones for which the core is shared for the three phases. Thus, this implies that the phases are coupled together.
 
-Also, the "volume of this common core is smaller than three times the volume of a single core"\footnote{\url{http://www.montefiore.ulg.ac.be/~vct/elec0014/transp-t.pdf}}.
+Also, the "volume of this common core is smaller than three times the volume of a single core".
 
 In this project, the magnetic material used for the core is soft iron for which the saturation induction is around 2T. Also, since it has been said that three individuals core were more suitable for big transformers, transformer \textbf{B} will be design in this way.
 
@@ -130,7 +139,7 @@ In this project, the magnetic material used for the core is soft iron for which 
 \quad\, The star connection consists in connecting each of three phases to a common nodes which is usually grounded. The star connection is depicted on Figure \ref{fig:star}.
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.6\textwidth]{star.png}
+    \includegraphics[width=0.5\textwidth]{Star.png}
     \caption{Three phase device - Star connection}
     \label{fig:star}
 \end{figure}
@@ -138,139 +147,149 @@ In this project, the magnetic material used for the core is soft iron for which 
 The advantages of this type of connection are multiple. First, in case of a fault, the really high current generated due to this fault can be evacuated through this grounding connecting. Also, the star connection are usually used for the high voltage side of the transformer because it allows to cut by $\sqrt{3}$ the voltage in each phase of the transformer.
 
 \subsection{Delta connection}
-The second type of connection of the three phases are delta connection. Here, the each extremities of a winding are connected to the two others phases, creating a closed loop. This  Thus, there is a component of the current that is trapped within this loop. 
-There are four basic configurations of a three-phase transformer, depending on if the primary or secondary windings are delta- or star-connected. Note that the winding connection options are the same whether using just one three-phase transformer or three separate single phase transformers.
+The second type of connection of the three phases are delta connection. Here, the each extremities of a winding are connected to the two others phases, creating a closed loop. The delta configuration is illustrated on Figure \ref{fig:delta}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Delta.png}
+    \caption{Three phase device - Star connection}
+    \label{fig:delta}
+\end{figure}
+
+Considering a current of intensity I injected in each lines \textit{a}, \textit{b}, and \textit{c}, it can be demonstrated that the current flowing through the branches of the transformer is $\sqrt{3}$ smaller.
+
+Usually, when considering a three-phase transformer, the connections at the low voltage side follow the delta type to minimize the current flowing in the winding of the transformer.
+\newpage
+\subsection{Transformer - Possible mountings}
+\quad\, The two previous subsections described the two possible type of connection of a three-phase device. Considering a transformer, the primary and secondary sides can be both considered as two three-phase devices. Thus, there are four possible mountings for the transformer.
+
 \begin{itemize}
-    \item Y-Y :
-    
+    \item Star-Star: The primary and secondary sides are both connected in star. This configuration, that can be met for high-voltage (HV) phase-shifting transformer, is depicted in Figure \ref{fig:star-star transformer}. 
     \begin{figure}[h]
     \centering
     \includegraphics[width=0.6\textwidth]{y-y.PNG}
-    \caption{Phase wiring for star-star transformer}
+    \caption{Star-Star three-phase transformer}
     \label{fig:star-star transformer}
     \end{figure}
     
-    \item $\Delta$-$\Delta$ :
-       
+    \item Delta-Delta: The primary and secondary sides are both connected in delta. This configuration, that can be met for low-voltage (LV) phase-shifting transformer, is depicted in Figure \ref{fig:delta-delta transformer}. 
     \begin{figure}[h]
     \centering
     \includegraphics[width=0.6\textwidth]{delta-delta.PNG}
-    \caption{Phase wiring for delta-delta transformer}
+    \caption{Delta-Delta three-phase transformer}
     \label{fig:delta-delta transformer}
     \end{figure}
-    
-    \item $\Delta$-Y :
-       
+\end{itemize}
+\newpage
+\begin{itemize}
+    \item Delta-Star: The primary side is wired in delta while the secondary side follows the star configuration. Delta-Star transformers are often used for step-up transformer because high current will flows in the primary side. Figure \ref{fig:delta-star transformer} depicts such configuration. 
     \begin{figure}[h]
     \centering
     \includegraphics[width=0.6\textwidth]{delta-y.PNG}
-    \caption{Phase wiring for delta-star transformer}
+    \caption{Delta-Star three-phase transformer}
     \label{fig:delta-star transformer}
     \end{figure}
     
-    \item Y-$\Delta$ :
-       
+    \item Star-Delta: The primary side is wired in star while the secondary side follows the delta configuration. Star-Delta transformers are often used for step-down transformer because high current will flows in the secondary side. Figure \ref{fig:star-delta transformer} depicts such configuration.  
     \begin{figure}[h]
     \centering
     \includegraphics[width=0.6\textwidth]{y-delta.PNG}
-    \caption{Phase wiring for star-delta transformer}
+    \caption{Star-Delta three-phase transformer}
     \label{fig:star-delta transformer}
     \end{figure}
 \end{itemize}
 
-For this project, $\Delta$-Y connections will be retained. Indeed such a configuration would allow to reduce by a factor $\sqrt{3}$ the current in the phases of the secondary side. Indeed, since the transformer is a step-down transformer, very high current will flow through the secondary.
+Considering that the two studied transformers for this project are step-down transformers, the retain wiring configuration is the Star-Delta configuration.
 
-\section{Calculation of the primary and secondary currents}
-After having chosen the primary and secondary connections, primary and secondary currents can be calculated knowing the relations between phase/line voltage and phase/line current. Hence, for the primary currents of the design A :
+\section{Nominal values}
+\quad\, In the beginning of the chapter, the characteristics of the two transformers have been established. The nominal apparent power $S_N$ have been defined as being
+
 \begin{equation}
-    I_P = \frac{\frac{200000 [VA]}{3}}{2400[V]} = 27,78 [A] = I_L
+\setstretch{1}
+    S_N = \sqrt{3}\cdot U_{N,1}\cdot I_{N,1} = \sqrt{3}\cdot U_{N,2}\cdot I_{N,2}
 \end{equation}
 
-For secondary currents of the design A :
-\begin{equation}
-    I_P = \frac{\frac{200000 [VA]}{3}}{240 [V]} = 277,78 [A]
-\end{equation}
-and 
-\begin{equation}
-    I_L = I_P/\sqrt{3} = 160,35[A]
-\end{equation}
-Analogously, primary and secondary currents for design B have been calculated. Results are shown in Tab. \ref{tab:currents}.
+Therefore, considering the two transformers \textbf{A} and \textbf{B}, the nominal current that has to be sustained by the conductors can easily be obtained by replacing the nominal voltage and apparent power value by the ones in Table \ref{tab:characteristics_transfo}. The results of the calculations are included in Table \ref{tab:currents}.
 
 \begin{table}[h]
     \centering
-\begin{tabular}{|l|l|l|}
-  \hline
-   & \textbf{Type A} &\textbf{Type B}\\
-  \hline
-    Input current [A] & 27,78 & 111,11\\\hline
-    Output current [A] & 160,35 & 1603,75\\\hline
-\end{tabular}
+    \begin{tabular}{l|ll}
+    Transformer                                  & \textbf{A} & \textbf{B} \\ \hline
+    Nominal RMS current [A] - Primary side   & 48.11                       & 192.45                      \\
+    Nominal RMS current [A] - Secondary side & 481.12                      & 4811.25                    
+    \end{tabular}
     \caption{Primary and secondary currents of the two design}
     \label{tab:currents}
 \end{table}
 
 
-%\begin{equation}
-%    S_N = \sqrt{3} \cdot V_N \cdot I_N
-%\end{equation}
-%et avec $S_{1,2}$ et $V_{1,2}$ connus.
+\section{Diameter of the windings}
+\quad\, As it has been mentioned in the previous section, the conductors has to be designed such that the specified nominal currents can be sustained an infinite amount of time without causing damages.
 
-\section{Geometry of the windings}
-Windings form the electrical circuit of the transformer. Actually, with a too small section, joule losses and heating can be too large. Now that the currents are known, the minimal surface needed for the winding to bear the current can be calculated too. As the maximum current density of the copper is known (J = 2 A/mm$^2$), the following formula can be used :
+It has been established that the maximum current density $J_{copper,max}$ of the copper is equal to 2 A/mm$^2$. Thus, by applying the formulae \ref{eq:Imax}, the cross-section of the conductors can be computed.
 
  \begin{equation}
-    I_{1,2} =  J_{Copper} \cdot A_{1,2}
+ \setstretch{1}
+    I_{1,2} =  J \cdot A_{1,2}\label{eq:Imax}
 \end{equation}
 
+Where $I_{1}=I_{N,1}$ and $I_{2}=\frac{I_{N,2}}{\sqrt{3}}$ since the current in each winding is $\sqrt{3}$ smaller than the current flowing through the lines.
+
+Once the cross-section computed, the radius of the winding can be deduced. The Table \ref{tab:windings_A} includes the obtained results.
 \begin{table}[h]
-    \centering
-\begin{tabular}{|l|l|l|l|l|}
-  \hline
-    & \multicolumn{2}{c|}{\textbf{Type A}} & \multicolumn{2}{c|}{\textbf{Type B}}\\\hline
-    Currents [A] & 27,78 & 160,35 & 111,11 & 1603,75\\\hline
-    Area [mm$^2$] & 13,89 & 80,175 & 55,55 & 801,875\\\hline
-    Radius [mm] & 2,1 & 5,1 & 4,2 & 16\\\hline
+\centering
+\begin{tabular}{l|llll}
+Transformer             & \multicolumn{2}{c}{\textbf{A}} & \multicolumn{2}{c}{\textbf{B}} \\ \hline
+Side                    & Primary       & Secondary       & Primary       & Secondary      \\
+Nominal RMS current [A] & 48.11         & 481.12          & 192.45        & 4811.25        \\
+Area [mm$^2$]           & 24.055        & 138.88          & 96.225        & 1388.88        \\
+Radius [mm]             & 2.77          & 6.64            & 5.53          & 21.02         
 \end{tabular}
-    \caption{Minimum area of the coils}
-    \label{tab:windings_area}
+\caption{Cross-section area of the windings}
+\label{tab:windings_A}
 \end{table}
 
-Basically there are different types of winding (cylindrical, helical, continuous disc,...) according to the transformer ratings (kVA). For the sake of simplification, only cylindrical and circular conductors will be considered here.
+As it can be noticed, the winding of the primary side are thinner than the one of the secondary side. This is logical because the current that has to be sustained is much higher in the low voltage side of the transformer.
 
-\section{Calculation of the number of turns}
-Let's define the transformers turns ratio as :
-\begin{equation}
-     N =  \frac{N_2}{N_1}
-\end{equation}
-which is equal, for an ideal transformer, to :
-\begin{equation}
-\frac{N_2}{N_1} = \frac{V_2}{V_1}
-\end{equation}
-That leads to turns ratio values of $N_A = 25$ for the first type and $N_B = 10$ for the second one.\\
+\section{Number of winding turns}
+\quad\, It has previously be defined the transformer ratio as being the ratio between the terminal secondary and primary phase-to-phase voltages of the transformer. Now, let's define the internal transformer ratio as being the ratio between the inner secondary and primary voltages of the transformer. The inner voltage is the one that would be measured at the winding terminals. 
 
-We can compute the conditions on the number of turns to not exceed the saturation induction of the chosen magnetic material, which is the soft iron. Using Faraday's Law, we have :
-
+By setting $n_1$ and $n_2$ as the number of turns of the primary and secondary winding, the internal transformer ratio $N_{int}$ is given by
 \begin{equation}
-    V_1 = N_1 \cdot \mid \frac{d\phi(t)}{dt} \mid = N_1 \cdot \frac{d(B(t)\cdot S)}{dt} = N_1 \cdot \omega \cdot B \cdot S
-\end{equation}
-where \textit{S} is the cross-section area of the core \textcolor{red}{ajouter aire du core} and $\omega$ is the pulsation at 50 Hz. Knowing that the maximum magnetic flux density for soft iron is around 2 tesla, the following condition has to be respected :
-\begin{equation}
-    B < B_{max} = 2 [T]
-\end{equation}
-Therefore, 
-\begin{equation}
-       \frac{V_1}{N_1 \cdot \omega \cdot S} < 2
-\end{equation}
-Hence,
-\begin{equation}
-N_1 > \frac{V_1}{\omega \cdot 2 \cdot S}
+    N_{int} = \frac{n_2}{n_1}=\frac{V_{2,int}}{V_{1,int}}
 \end{equation}
 
-Finally, the condition on the number of turns on the secondary coil is computed using the transformers turns ratio and we have $N_2 < ...$.
+Based on the previous statement, we can see that depending on the configuration of the transformer, the relation between the transformer ratio and the internal transformer ratio will be different. Considering the transformer as ideal, the relations for each configurations are listed in equations from (\ref{eq:N_star-star}) to (\ref{eq:N_delta-delta}).
+\begin{subequations}
+\setstretch{1}
+\begin{equation}
+    \bullet\text{Star-Star: } N_{int} = \frac{n_2}{n_1} = \frac{V_{2,int}}{V_{1,int}} = \frac{U_{2}}{U_{1}} = N\label{eq:N_star-star}
+\end{equation}
+\begin{equation}
+    \bullet\text{Star-Delta: } N_{int} = \frac{n_2}{n_1} = \frac{V_{2,int}}{V_{1,int}} = \frac{U_{2}}{\frac{U_{1}}{\sqrt{3}}} = \sqrt{3}\cdot N\label{eq:N_star-delta}
+\end{equation}
+\begin{equation}
+    \bullet\text{Delta-Star: } N_{int} = \frac{n_2}{n_1} = \frac{V_{2,int}}{V_{1,int}} = \frac{\frac{U_{2}}{\sqrt{3}}}{U_{1}} = \frac{N}{\sqrt{3}}\label{eq:N_delta-star}
+\end{equation}
+\begin{equation}
+    \bullet\text{Delta-Delta: } N_{int} = \frac{n_2}{n_1} = \frac{V_{2,int}}{V_{1,int}} = \frac{U_{2}}{U_{1}} = N\label{eq:N_delta-delta}
+\end{equation}\label{eq:N}
+    \end{subequations}
 
- \textcolor{red}{Rajouter qualité du bobinage}\\
- \textcolor{red}{Déterminer S pour chaque phase et donc $N_1$ et $N_2$ pour chaque phase}\\
-\textcolor{red}{Ajouter la charge de 1000 $\ohm$ pour vérifier la capacité du transfo}
+Theses equations gives a relation between the ratio of the number of turns and the phase-to-phase terminal voltages of the transformer. Thus, if the number of the turns on one side is chosen, the number of turns at the other side will be deduced.
+
+From the statement, it is asked to not exceed the saturation induction of the core. According to the Faraday's Law applied to one side of the transformer, the magnetic flux density $b$ is given by
+\begin{equation}
+\setstretch{1}
+    b = \frac{V_{int}}{n\cdot\omega\cdot S} < 2
+\end{equation}
+where $\omega = 2\cdot\pi\cdot 50$ rad/s is the pulsation and S is the cross section of the core (in m$^2$). Usually, the number of turn is chosen at the side wired in star. Here, the primary side is in star configuration. So, the number of turns $n_1$ has to satisfy the inequality (\ref{eq:n_min}).
+\begin{equation}
+\setstretch{1}
+    n_1 > \frac{V_{int}}{2\cdot\omega\cdot S}\label{eq:n_min}
+\end{equation}
+
+Also, assuming that there is no spacing between each turn in the winding, the number of turn is limited by the height of the core.
 
 \section{Selection for core design}
 \subsection{Comparison of core- and shell-type designs}
