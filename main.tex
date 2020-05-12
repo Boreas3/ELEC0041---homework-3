@@ -369,22 +369,32 @@ Finally, Figure \ref{fig:Bshell} shows a picture of the shell design of the tran
     \label{fig:equivalent_circuit}
 \end{figure}
 
-On the diagram, the four parameters $R$, $X$, $R_{E}$, and $X_\mu$ have to be determined experimentally by performing two different tests, namely the \textbf{open-load} and the \textbf{short-circuit}. The definitions of these four parameters are indicated below.
+On the diagram, four parameters $R$, $X$, $R_{E}$, and $X_\mu$ have to be determined experimentally by performing two different tests, namely the \textbf{open-load} and the \textbf{short-circuit}. The definitions of these four parameters are indicated below.
+
 \begin{itemize}
+\setstretch{1}
     \item $R$ is the resistance modelling the copper losses in the transformer. 
     \item $X$ is the leakage reactance in the transformer.
-    \item $R_E$
+    \item $R_E$ is the shunt resistance modelling the iron losses. Really large compared to $R$.
+    \item $X_\mu$ is the magnetizing inductance.
 \end{itemize}
+
 \subsection{Open-circuit test}
 The first test consist in connecting a load of infinite resistance at the terminal of the secondary. Then, the primary side is fed by a voltage source with a set-point fixed at the nominal voltage specified in Table \ref{tab:characteristics_transfo}. 
 
 Since the secondary is open, the current $I_{2'}$ is equal to 0A. Thus, all the current injected from the primary goes into the branch in parallel with the voltage source connected at the terminal of the primary side. 
 
-Knowing the power injected into the transformer, the two parameters $X_\mu$ and $R_{E}$  can be obtained from equations \ref{}
+Knowing the power injected into the transformer, the two parameters $X_\mu$ and $R_{E}$  can be obtained from equations (\ref{eq:oc_P}) and (\ref{eq:oc_Q}) using a volt-meter to measure the voltage $v_1$.
 
-\begin{equation}
-   P_oc = \frac{v_1^2}{R_{E}}
-\end{equation}
+\begin{subequations}
+   \begin{equation}
+        P_{oc} = \frac{v_1^2}{R_{E}}\label{eq:oc_P}
+   \end{equation}
+   \begin{equation}
+        Q_{oc} = \frac{v_1^2}{X_\mu}\label{eq:oc_Q}
+   \end{equation}
+
+\end{subequations}
 \subsubsection{Open-load test}
 This test is used to calculate the loss in the magnetic circuit (core losses). It is carried out by fixing the resistance of the secondary side to a very high value. In this case, we have $I_1 =$ 7 A and $I_2 =$ 0 A. Using the fact that the electrical power dissipated in $R_1$ and $X_1$ can be neglected, the value of $R_{H+F}$ for the core-type B design can be computed by
 
