@@ -121,7 +121,13 @@ Therefore, the nominal apparent power $S_N$ is defined as follows
     S_N = \sqrt{3}\cdot U_N\cdot I_N
 \end{equation}
 
-where $U_N$ is the nominal phase-to-phase voltage (RMS value) and $I_N$ is the nominal current (RMS value).
+where $U_N$ is the nominal phase-to-phase voltage (RMS value) and $I_N$ is the nominal current (RMS value). Note that the link between the RMS value and its equivalent peak value can be found by using
+
+\begin{equation}
+    Peak_{value} = RMS_{value} \cdot \sqrt{2}
+\end{equation}
+
+
 \section{Type of three-phase transformer}
 \quad\, When considering a three phase transformer, several configurations regarding to the construction of the core.
 
@@ -223,7 +229,7 @@ Therefore, considering the two transformers \textbf{A} and \textbf{B}, the nomin
 \end{table}
 
 
-\section{Diameter of the windings}
+\section{Diameter of the windings}\label{diameter}
 \quad\, As it has been mentioned in the previous section, the conductors has to be designed such that the specified nominal currents can be sustained an infinite amount of time without causing damages.
 
 It has been established that the maximum current density $J_{copper,max}$ of the copper is equal to 2 A/mm$^2$. Thus, by applying the formulae \ref{eq:Imax}, the cross-section of the conductors can be computed.
@@ -276,24 +282,32 @@ Based on the previous statement, we can see that depending on the configuration 
 \end{equation}\label{eq:N}
     \end{subequations}
 
-Theses equations gives a relation between the ratio of the number of turns and the phase-to-phase terminal voltages of the transformer. Thus, if the number of the turns on one side is chosen, the number of turns at the other side will be deduced.
+Theses equations give a relation between the ratio of the number of turns and the phase-to-phase terminal voltages of the transformer. Thus, if the number of the turns on one side is chosen, the number of turns at the other side will be deduced.
 
 From the statement, it is asked to not exceed the saturation induction of the core. According to the Faraday's Law applied to one side of the transformer, the magnetic flux density $b$ is given by
 \begin{equation}
 \setstretch{1}
     b = \frac{V_{int}}{n\cdot\omega\cdot S} < 2
 \end{equation}
-where $\omega = 2\cdot\pi\cdot 50$ rad/s is the pulsation and S is the cross section of the core (in m$^2$). Usually, the number of turn is chosen at the side wired in star. Here, the primary side is in star configuration. So, the number of turns $n_1$ has to satisfy the inequality (\ref{eq:n_min}).
+where $\omega = 2\cdot\pi\cdot 50$ rad/s is the pulsation and S is the cross section of the core (in m$^2$). As each leg of the core has the same size, the value of S will be the same for each leg. Usually, the number of turn is chosen at the side wired in star. Here, the primary side is in star configuration. So, the number of turns $n_1$ has to satisfy the inequality (\ref{eq:n_min}).
 \begin{equation}
 \setstretch{1}
     n_1 > \frac{V_{int}}{2\cdot\omega\cdot S}\label{eq:n_min}
 \end{equation}
 
-Also, assuming that there is no spacing between each turn in the winding, the number of turn is limited by the height of the core.
+\section{Establishment of the transformer geometry}
+\quad\, Now that the constraint on the geometry have been set, the design of the transformers \textbf{A} and \textbf{B} can be processed. 
 
-\section{Selection for core design}
-\subsection{Comparison of core- and shell-type designs}
-The most difference that exists between core- and shell-type design is that in core-type design the winding encircles the core as they are placed on two core limb and for shell-type design the core encircles most of the part of the windings as they are placed on mid arm of the core. That leads to single magnetic circuit in core-type while there are two magnetic flux paths for shell-type, as can be seen from Fig. \ref{fig:shell_core_type}.
+First, as it has been mentioned in the section \ref{diameter}, the diameter of the windings has to be chosen such that the specified nominal current $I_N$ can flows without damaging the copper wires in the long term. 
+This current is the one that will flows when performing the short-circuit test. 
+
+Then, the number of turns and the internal transformer ratio has to be chosen such that
+\begin{itemize}
+    \item the specified voltage ratio is satisfied when performing an open-circuit test
+    \item the magnetic flux density $b$ is lower than 2T
+\end{itemize}
+
+Also, for each of the two transformers, core and shell design have been studied. Figure \ref{fig:shell_core_type} depicts such configuration.
 
  \begin{figure}[h]
     \centering
@@ -303,39 +317,53 @@ The most difference that exists between core- and shell-type design is that in c
 \end{figure}
 
 
-\subsection{Geometry of the design}
-These designs have been performed using \textit{gmsh} and are shown in the Fig.\\
-\textcolor{red}{+ ajouter les deux geos}
-
-\begin{table}[h]
+After a trial and error process using \textit{Gmsh}, the geometries that have been retained is summarized in Table \ref{tab:designed_transfo}. The corresponding transformers with the cotes on it are illustrated on Figures from \ref{fig:Acore} to \ref{fig:Bshell}. 
+\input{table_geo}
+\begin{figure}[h]
     \centering
-\begin{tabular}{|l|l|l|l|l|}
-  \hline
-   & \multicolumn{2}{c|}{\textbf{Type A}} & \multicolumn{2}{c|}{\textbf{Type B}}\\\hline
-   \textbf{Type design} & \textbf{Shell} & \textbf{Core} & \textbf{Shell} & \textbf{Core}\\\hline
-   $N_1$ [turns]& & & &\\\hline
-    $N_2$ [turns]& & & &\\\hline
-    Width of the core [cm]& & & &\\\hline
-    Thickness of the core [cm]& & & &\\\hline
-    Total height of the transformer [cm]& & & &\\\hline
-    Total width of the transformer [cm]& & & &\\
-  \hline
-\end{tabular}
-    \caption{Geometry of the two three-phase transformers}
-    \label{tab:designed_transfo}
-\end{table}
+    \includegraphics[width=0.5\textwidth]{"Transfo - géometries/transfoA_core.png"}
+    \caption{Transfo A - core}
+    \label{fig:Acore}
+\end{figure}
+This first geometry represent the transformer \textbf{A} using the core configuration. As it can be noticed, the retained design is a mono-core where the three phases are magnetically coupled. This allows to produce a compact transformer. 
 
-+ Calculer les rendements des deux transfos :
+Here, the three phases does not see the same environment. Indeed, the central winding is trapped in the core while the external windings are partly directly in contact with the surrounding air. This leads to an non symmetry regarding the three phases. Through simulations, an non even distribution of the current between the three phases have been noticed due to this non-symmetry.
 
-\begin{equation}
-   \eta = \frac{P_2}{P_1}
-\end{equation}
+On the graph, the long windings are the one corresponding to the primary windings.
+\newpage
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{"Transfo - géometries/transfoA_shell.png"}
+    \caption{Transfo A - shell}
+    \label{fig:Ashell}
+\end{figure}
 
+The second design considered for the low power transformer is the shell design. Here, the "external" coils are surrounded by a magnetic material as well. Thus, the the non-symmetry described earlier disappear using this design.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.65\textwidth]{"Transfo - géometries/transfoB_core.png"}
+    \caption{Transfo B - core}
+    \label{fig:Bcore}
+\end{figure}
+
+Now, considering the high power transformer \textbf{B}, a configuration based on three separated core for each of the phases has been selected. Indeed, the transformer has quite large dimensions. Therefore, separating the three phases allows to ease the installation of the three-phase transformer.
+
+As for the transformer \textbf{A}, the core and shell design have been studied. Figure \ref{fig:Bcore} depicts the chosen design. The magnetic coupling between the three phases is now quasi nonexistent since the surrounding air physically separate each of the three phases.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.65\textwidth]{"Transfo - géometries/transfoB_shell.png"}
+    \caption{Transfo B - shell}
+    \label{fig:Bshell}
+\end{figure}
+
+Finally, Figure \ref{fig:Bshell} shows a picture of the shell design of the transformer \textbf{B}. As for the transformer \textbf{A}, the shells even up the current distribution between the three phases. However, the phenomena is less pronounce than for transformer \textbf{A} since the phases are here not coupled.
 \section{Transformer tests}
 
 \subsection{Equivalent circuit}
 There are two kind of tests : open and short circuit tests. They are both performed to determine the equivalent circuit of transformer, its voltage regulation and efficiency.
-The power required for these tests is equal to the power loss occurring in the transformer.
+The power required for these tests is equal to the power loss occurring in the transformer. The equivalent circuit is shown at Fig.\ref{fig:equivalent_circuit}.
 
  \begin{figure}[h]
     \centering
@@ -345,66 +373,184 @@ The power required for these tests is equal to the power loss occurring in the t
 \end{figure}
 
 \subsubsection{Open-load test}
-Calculate the core loss Calcul des pertes dans le circuit magnétique  $R_{H,F}$ et $X_\mu$ :
+This test is used to calculate the loss in the magnetic circuit (core losses). It is carried out by fixing the resistance of the secondary side to a very high value. In this case, we have $I_1 =$ 7 A and $I_2 =$ 0 A. Using the fact that the electrical power dissipated in $R_1$ and $X_1$ can be neglected, the value of $R_{H+F}$ for the core-type B design can be computed by
 
 \begin{equation}
-   P_V = \frac{U_1^2}{R_{H,F}}
+   P_V = \frac{U_1^2}{R_{H+F}}
 \end{equation}
+
+Which leads to
+
+\begin{equation}
+    R_{H+F} = \frac{U_1^2}{U_1 \cdot I_1} = \frac{48989,79^2}{48989,79 \cdot 7} = 6998,54 \Omega
+\end{equation}
+Then the current through $R_{H+F}$ is
+
+\begin{equation}
+    I_{R_{H+F}} = \frac{U_1}{R_{H+F}} = \frac{48989,79}{6998,54} = 7 A
+\end{equation}
+The current through $X_\mu$ can be calculated by 
+
+\begin{equation}
+    \|I_{\mu}\| = \sqrt{{I_1}^2 - {I_{R_{H+F}}}^2}
+\end{equation}
+Then the parameter $X_\mu$ is
+
+\begin{equation}
+    X_\mu = \frac{\|U_1\|}{\|I_{\mu}\|} = ... \Omega
+\end{equation}
+
+Knowing the imaginary part of the power, this parameter could also be calculated by 
 \begin{equation}
    Q_v = \frac{U_1^2}{X_{\mu}}
 \end{equation}
 
 \subsubsection{Short-circuit test}
-Calculate the total copper loss in the windings ,Calcul des résistances électriques des deux côtés + réactance de fuite :
+This test is used to determine the copper loss that occurs on the windings at full load. In practice, it is done by fixing the resistance of the secondary side as close to zero as possible. In this case, $I_{cc} = I_1 = 273 A$. The equivalent resistance (in sum) are computed by
 \begin{equation}
 P_{cc} = (R_1 + R_2') \cdot I_{cc}^2
 \end{equation}
+Where $I_{cc}$ is the short circuit current (thus maximal nominal current) and has been calculated previously. Then, we have
+
 \begin{equation}
-Q_{cc} = (X_1 + X_2') \cdot I_{cc}^2
+    R_1 + R_2' = \frac{P_{cc}}{{I_1}^2} = \frac{48989,79 \cdot 192,45}{192,45^2} = 246,35 \Omega
+\end{equation}
+Finally, the sum of leakage reactance are computed by
+\begin{equation}
+Q_{cc} = (X_1 + X_2') \cdot I_1^2 \iff X_1 + X_2' = \frac{Q_{cc}}{I_1^2}
 \end{equation}
 
-+ Tableau récapitulatif des valeurs
+Where the reactive power is given by
+
+\begin{equation}
+    Q = \sqrt{(U_1 \cdot I_1)^2-P^2} = \sqrt{(U_1 \cdot I_1)^2-P^2} = .. var
+\end{equation}
+
+\begin{equation}
+    \iff X_1 + X_2' = \frac{Q}{I_1^2} = ... \Omega
+\end{equation}
+
+Other values of these parameters for shell-type design have been computed in a similar way and are displayed on Tab.\ref{tab:equivalent_parameters}.
+
+\begin{table}[h]
+    \centering
+\begin{tabular}{l|ll|ll}
+\textbf{Design}                            & \multicolumn{2}{c|}{\textbf{Core}} & \multicolumn{2}{c}{\textbf{Shell}} \\
+\textbf{Type}      &     A & B & A & B\\
+$R_{H+F}$ [$\Omega$] & & 6998,54 & & \\
+$X_\mu$ [$\Omega$] & & & & \\
+$R_1 + R_2'$ [$\Omega$] & & 246,35 & & \\
+$X_1 + X_2'$ [$\Omega$] & & & & \\
+           
+
+\end{tabular}
+    \caption{Parameters of the equivalent circuit of the three-phase transformers}
+    \label{tab:equivalent_parameters}
+\end{table}
+%%%%%
+% Knowing the value of the losses, the efficiency of the transformers can be calculated using 
+% \begin{equation}
+%   \eta = \frac{P_{output} [kW]}{P_{input} [kW]}
+% \end{equation}
+%%%%
 
 \subsubsection{Exterior characteristic}
-Tracer le graphe caractéristique U-I pour chaque transfo
+We can now draw the U-I characteristic for each transformer by varying the charge connected to the secondary side, as shown in the graph below.
+
+\textcolor{red}{Tracer le graphe de $U$ en fonction de $I$ pour les deux types}
 
 \section{Additional parametric studies}
 
+In this section, the influence of a few parameters on the efficiency of the three-phase transformer will be studied.
+
 \subsection{Effect of the winding electric resistivity}
-Tracer le graphe de $\eta$ en fonction de $\rho$
-\subsection{Effect of the core magnetic permeability}
-Par exemple, tracer le graphe de $\eta$ en fonction de $\mu$
-\subsection{Effect of the presence of an air gap}
-Un air gap apporte une réluctance en série tel que :
+According to Pouillet's law (eq. \ref{eq:pouillet}), we know that increasing the winding electric resistivity will increase the resistance as well and thus decrease the intensity of the currents :
 
 \begin{equation}
-    R_{fer} << R_{air}
+    R = \rho \cdot \frac{l}{S}
+    \label{eq:pouillet}
 \end{equation}
-Vu que 
+where 
+\begin{itemize}
+    \item $\rho$ is the electric resistivity of the conductor, which is $2 \cdot 10^{-8} \Omega \cdot m$ for the copper
+    \item L its length 
+    \item S its cross-section area
+\end{itemize}
+
+Efficiency can now be plotted over $\rho$ as a secondary variable, by increasing the electric resistivity (for higher temperatures of the conductor, for example).\\
+
+\textcolor{red}{Tracer le graphe de $\eta$ en fonction de $\rho$}
+
+We can also compute the $I^2R$ component of conductor losses for higher electric resistivity which leads to bigger copper losses.
+
+\subsection{Effect of the core magnetic permeability}
+Varying the magnetic permeability has a big impact on the efficiency of the transformer. Indeed, a higher permeability induces a higher efficiency since the field lines are better canalized in the materials, and less losses occur. This figure also confirms that the actual value of magnetic permeability is a good trade-off.
+
+\textcolor{red}{Tracer le graphe de $\eta$ en fonction de $\mu$ + de là, sélectionner un matériau avec un bon $\mu$}
+
+\subsection{Effect of the presence of an air gap}
+The presence of air gap increases the total reluctance since the permeability of the air is much smaller than the one of the core because the reluctance of the air is bigger, such as
 \begin{equation}
-   R = \frac{1}{\mu} \cdot \frac{d}{S}
+    \Re = \frac{d}{\mu \cdot S} + \frac{e}{\mu_0 \cdot S} \approx \frac{e}{\mu_0 \cdot S}
+    \label{eq:total_reluctance}
 \end{equation}
-et
+with
+\begin{itemize}
+    \item e the gap space
+    \item $\mu_0$ is the magnetic permeability of the air
+    \item S the area of the air gap
+\end{itemize}
+
+and because 
 \begin{equation}
-   \mu_{fer} >> \mu_{air}
+    \mu_{fer} >> \mu_{air} \iff {\Re_{fer}} << {\Re_{air}}
 \end{equation}
-Tracer le graphe de $\eta$ en fonction de l'air gap (< 0,1 mm)
+
+According to equation \ref{eq:total_reluctance}, an increasing of air gap will increase \textit{e} thus $\Re$ and then the magnetic permeability will decrease, leading to less efficiency.
+
+\textcolor{red}{Tracer le graphe de $\eta$ en fonction de l'air gap (< 0,1 mm)}
 
 \subsection{Effect of a non-laminated core}
-Etant donné que le but du fer lamellé c'est diminuer les pertes par effet joule dûs aux courants de Foucault, on peut essayer de simuler du fer lamellé en faisant diminuer progressivement la conductivité électrique du noyau et voir l'impact sur le rendement $\eta$
---> graphe de $\eta$ en fonction de la conductivité $\sigma$
-\subsection{Effect of shielding the transformer}
-Shielding the transformer consists in surrounding it with a tank. +blabla\\
+There are two main kind of core losses in a transformer : losses by Joule effect due to Eddy current and losses by hysteresis.\\ \\
+The Eddy currents are the ones that flow in the core, which is a direct consequence of Lenz's Law. They produce heat, using up energy and then reduce the efficiency of the transformer. In order to get rid of their impact, one possibility is to laminate the core, with laminations separated by thin layers of insulator. In this way, the electrical resistivity in the core increases, leading to less intensities of Eddy currents and thus more efficiency.\\
 
-En pratique, rajouter une volume qui englobe le transfo dans la géométrie. Normalement, un bouclier n'augmente pas des masses le rendement du transfo.
+Without any lamination, the circuiting Eddy current will be enormous through a single mass of the iron core. To simulate the impact of the lack of laminations, the electrical conductivity of the core will be decreased.
+
+\textcolor{red}{Tracer le graphe de $\eta$ en fonction de $\sigma$}
+
+Besides Eddy current, hysteresis losses also generate heat. They are due to reversal of magnetisation in the core (50 times per second for 50 Hz). Hysteresis loss are reduced as much as possible during manufacturing. Note also that both losses can not be zero. Inherent losses will be there, even if the transformer is not connected to any load.\\
+
+Another solution is to use materials which are not conductive, like ferrite.
+But this solution will be avoided because it can be very useless at low frequency (as 50 Hz).
+
+\subsection{Effect of shielding the transformer}
+Shielding the transformer consists in surrounding it with a high conductivity metal or high permeability material tank in order to reduce the leakage magnetic flux density along the magnetic path.\\
+
+\textcolor{red}{rajouter un volume qui englobe le transfo dans la géométrie + photo}
+
+To see the shielding effectiveness, the leakage magnetic flux density outside the metal tank is compared with the case where there is no tank, so the tank material is considered as the air in this case.
+
+\textcolor{red}{lancer simu + photo before/after the tank}
+
+The shielding effectiveness is evaluated here only by watching the maximal value of B in both cases.
+
 
 \subsection{Effect of higher operating frequencies}
-Calcul de la gamme de fréquence dans laquelle le transfo est censé fonctionner [$f_{min}$,$f_{max}$] + Que se passe-t-il si on augmente les 50 Hz ?\\
+As said previously, to not exceed the saturation induction of the core, there are minimum values of the number of turns and thus a minimum value of the frequency too, defined by
 
-Par exemple, tracer le graphe de $\eta$ en fonction de $f$ ou $\omega$
+\begin{equation}
+\setstretch{1}
+    f > \frac{V_{int}}{2 \cdot \pi \cdot B_{max}\cdot n_1 \cdot S}\label{eq:f_min}
+\end{equation}
+
+It also has maximum frequency to minimize the losses. As a remind, losses due to Eddy current are $\propto \omega^2$ and losses by hysteresis are $\propto \omega$. So there is a \textit{frequency range} [$f_{min}$,$f_{max}$] over which the transformer is considered to give satisfactory performances. Beyond this range, the efficiency of the transformer drops.
+
+\textcolor{red}{Tracer le graphe de $\eta$ en fonction de $f$ ou $\omega$}
 
 \subsection{Effect of the loss of one phase}
-%The effect of the loss of one phase also depends on the reasons for choosing a star or delta configuration for transformer winding connections. For example, star connections allows high range of voltages while delta connections are more reliable, meaning that if one winding stop working the other two can still maintain full line voltages to the load.
+The loss of a phase means that one phase of the three phases is physically disconnected on the primary side of the transformer. This is often an unintentionally action, so it can simulate a broken conductor that leads to an open phase for example.\\
+
+The effect of the loss of one phase depends on the reasons for choosing a star or delta configuration for transformer winding connections. For example, star connections allows high range of voltages while delta connections are more reliable, meaning that if one winding stop working the other two can still maintain full line voltages to the load.
 
 \section{Conclusion - Limitations - Further work}
 Mettre les limites du modèle (cooling methods, insulating oil not discussed here, sélection du type d'enroulement selon la puissance apparente, ..)
