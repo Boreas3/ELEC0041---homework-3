@@ -101,12 +101,12 @@ These characteristics supposed that the network is at 50 Hz. Those are summarize
 
 \begin{table}[h]
     \centering
-\begin{tabular}{l|ll}
-Transformer type   & \textbf{A}             & \textbf{B} \\ \hline
+\begin{tabular}{l|l|l}
+\textbf{Type}  & \textbf{A}             & \textbf{B} \\ \hline
 Input voltage [V]  & 2400                   & 60000      \\
 Output voltage [V] & 240                    & 2400       \\
 Output power [kVA] & 200                    & 20000      \\
-Frequency [Hz]     & \multicolumn{1}{c}{50} & 50        
+Frequency [Hz]     & 50 & 50        
 \end{tabular}
     \caption{Specifications of the two three-phase transformers}
     \label{tab:characteristics_transfo}
@@ -206,9 +206,10 @@ Usually, when considering a three-phase transformer, the connections at the low 
 \end{itemize}
 
 Considering that the two studied transformers for this project are step-down transformers, the retain wiring configuration is the Star-Delta configuration.
-
+\chapter{Design of the transformers}
+This chapter is devoted to the design of the transformers \textbf{A} and \textbf{B}. 
 \section{Nominal values}
-\quad\, In the beginning of the chapter, the characteristics of the two transformers have been established. The nominal apparent power $S_N$ have been defined as being
+\quad\, In the beginning of the previous chapter, the characteristics of the two transformers have been established. The nominal apparent power $S_N$ have been defined as being
 
 \begin{equation}
 \setstretch{1}
@@ -219,8 +220,8 @@ Therefore, considering the two transformers \textbf{A} and \textbf{B}, the nomin
 
 \begin{table}[h]
     \centering
-    \begin{tabular}{l|ll}
-    Transformer                                  & \textbf{A} & \textbf{B} \\ \hline
+    \begin{tabular}{l|l|l}
+    \textbf{Type}                                  & \textbf{A} & \textbf{B} \\ \hline
     Nominal RMS current [A] - Primary side   & 48.11                       & 192.45                      \\
     Nominal RMS current [A] - Secondary side & 481.12                      & 4811.25                    
     \end{tabular}
@@ -244,8 +245,8 @@ Where $I_{1}=I_{N,1}$ and $I_{2}=\frac{I_{N,2}}{\sqrt{3}}$ since the current in 
 Once the cross-section computed, the radius of the winding can be deduced. The Table \ref{tab:windings_A} includes the obtained results.
 \begin{table}[h]
 \centering
-\begin{tabular}{l|llll}
-Transformer             & \multicolumn{2}{c}{\textbf{A}} & \multicolumn{2}{c}{\textbf{B}} \\ \hline
+\begin{tabular}{l|ll|ll}
+\textbf{Type}             & \multicolumn{2}{c|}{\textbf{A}} & \multicolumn{2}{c}{\textbf{B}} \\ \hline
 Side                    & Primary       & Secondary       & Primary       & Secondary      \\
 Nominal RMS current [A] & 48.11         & 481.12          & 192.45        & 4811.25        \\
 Area [mm$^2$]           & 24.055        & 138.88          & 96.225        & 1388.88        \\
@@ -306,7 +307,7 @@ Then, the number of turns and the internal transformer ratio has to be chosen su
     \item the specified voltage ratio is satisfied when performing an open-circuit test
     \item the magnetic flux density $b$ is lower than 2T
 \end{itemize}
-
+\newpage
 Also, for each of the two transformers, core and shell design have been studied. Figure \ref{fig:shell_core_type} depicts such configuration.
 
  \begin{figure}[h]
@@ -317,23 +318,25 @@ Also, for each of the two transformers, core and shell design have been studied.
 \end{figure}
 
 
-After a trial and error process using \textit{Gmsh}, the geometries that have been retained is summarized in Table \ref{tab:designed_transfo}. The corresponding transformers with the cotes on it are illustrated on Figures from \ref{fig:Acore} to \ref{fig:Bshell}. 
+After a trial and error process using Gmsh, the geometries that have been retained is summarized in Table \ref{tab:designed_transfo}. The corresponding transformers with the cotes on it are illustrated on Figures from \ref{fig:Acore} to \ref{fig:Bshell}. 
 \input{table_geo}
+
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\textwidth]{"Transfo - géometries/transfoA_core.png"}
+    \includegraphics[width=0.45\textwidth]{"Transfo - géometries/transfoA_core.png"}
     \caption{Transfo A - core}
     \label{fig:Acore}
 \end{figure}
-This first geometry represent the transformer \textbf{A} using the core configuration. As it can be noticed, the retained design is a mono-core where the three phases are magnetically coupled. This allows to produce a compact transformer. 
+
+The first geometry in Figure \ref{fig:Acore} corresponds to the transformer \textbf{A} based on the core configuration. As it can be noticed, the retained design is a mono-core where the three phases are magnetically coupled. This allows to produce a compact transformer. 
 
 Here, the three phases does not see the same environment. Indeed, the central winding is trapped in the core while the external windings are partly directly in contact with the surrounding air. This leads to an non symmetry regarding the three phases. Through simulations, an non even distribution of the current between the three phases have been noticed due to this non-symmetry.
 
 On the graph, the long windings are the one corresponding to the primary windings.
-\newpage
+
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\textwidth]{"Transfo - géometries/transfoA_shell.png"}
+    \includegraphics[width=0.45\textwidth]{"Transfo - géometries/transfoA_shell.png"}
     \caption{Transfo A - shell}
     \label{fig:Ashell}
 \end{figure}
@@ -342,18 +345,18 @@ The second design considered for the low power transformer is the shell design. 
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.65\textwidth]{"Transfo - géometries/transfoB_core.png"}
+    \includegraphics[width=0.6\textwidth]{"Transfo - géometries/transfoB_core.png"}
     \caption{Transfo B - core}
     \label{fig:Bcore}
 \end{figure}
-
+\newpage
 Now, considering the high power transformer \textbf{B}, a configuration based on three separated core for each of the phases has been selected. Indeed, the transformer has quite large dimensions. Therefore, separating the three phases allows to ease the installation of the three-phase transformer.
 
 As for the transformer \textbf{A}, the core and shell design have been studied. Figure \ref{fig:Bcore} depicts the chosen design. The magnetic coupling between the three phases is now quasi nonexistent since the surrounding air physically separate each of the three phases.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.65\textwidth]{"Transfo - géometries/transfoB_shell.png"}
+    \includegraphics[width=0.6\textwidth]{"Transfo - géometries/transfoB_shell.png"}
     \caption{Transfo B - shell}
     \label{fig:Bshell}
 \end{figure}
@@ -384,127 +387,142 @@ The first test consist in connecting a load of infinite resistance at the termin
 
 Since the secondary is open, the current $I_{2'}$ is equal to 0A. Thus, all the current injected from the primary goes into the branch in parallel with the voltage source connected at the terminal of the primary side. 
 
-Knowing the power injected into the transformer, the two parameters $X_\mu$ and $R_{E}$  can be obtained from equations (\ref{eq:oc_P}) and (\ref{eq:oc_Q}) using a volt-meter to measure the voltage $v_1$.
+Knowing the power injected into the transformer, the two parameters $X_\mu$ and $R_{E}$  can be obtained from equations (\ref{eq:oc_P}) and (\ref{eq:oc_Q}) using a volt-meter (placed in parallel with the voltage source) to measure the voltage $v_1$.
 
 \begin{subequations}
+\setstretch{1}
    \begin{equation}
         P_{oc} = \frac{v_1^2}{R_{E}}\label{eq:oc_P}
    \end{equation}
    \begin{equation}
         Q_{oc} = \frac{v_1^2}{X_\mu}\label{eq:oc_Q}
    \end{equation}
-
 \end{subequations}
-\subsubsection{Open-load test}
-This test is used to calculate the loss in the magnetic circuit (core losses). It is carried out by fixing the resistance of the secondary side to a very high value. In this case, we have $I_1 =$ 7 A and $I_2 =$ 0 A. Using the fact that the electrical power dissipated in $R_1$ and $X_1$ can be neglected, the value of $R_{H+F}$ for the core-type B design can be computed by
+Using Gmsh and the solver Getdp, the open-circuit test have been conducted by applying a load of 1M$\Omega$. This test have been realised for each of the three phases \textbf{simultaneously}, and a mean of the results have been computed. Averaging the results allows to only consider on equivalent circuit for the three phases.
 
+Table \ref{tab: oc_result} contains these results.
+\begin{table}[h]
+\centering
+\begin{tabular}{l|ll|ll}
+\textbf{Type}      & \multicolumn{2}{c|}{A}         & \multicolumn{2}{c}{B}         \\ \hline
+\textbf{Design}    & \textbf{Core} & \textbf{Shell} & \textbf{Core} & \textbf{Shell} \\
+$R_E$ [$\Omega$]   & 52,924,15     & 70,736,71      & 42,231,61     & 320,758,072.50 \\
+$X_\mu$ [$\Omega$] & 26,054.85     & 64,509.72      & 7,047.37      & 49,417.50     
+\end{tabular}
+\caption{Open-circuit test - Results}
+\label{tab: oc_result}
+\end{table}
 
+The results show that the value of the shunt resistance and reactance $R_E$ and $X\mu$ are really large compared to $R$ and $X$. Performing an open-circuit test force the current to flow through this large impedance, allowing us to measure them using a volt-meter.
+\subsection{Short-circuit test}
+\quad\, Two of the four parameters have been computed. It remains the leakage reactance $X$ and the resistance $R$ that will be determine using a short-circuit test. During this test, the secondary is short-circuited ($v_2$ = 0) while the primary side is connected to a voltage source with a set-point at the nominal voltage. 
 
-Which leads to
+During this test, really large current (near from the nominal current value) will flow through the transformer. By placing a ampere-meter in series with the voltage source, the value of the resistance and impedance $R$ and $X$ (neglecting the branch shunt) can be obtained using the equations (\ref{eq:cc_P}) and (\ref{eq:cc_Q}).
 
-\begin{equation}
-    R_{H+F} = \frac{U_1^2}{U_1 \cdot I_1} = \frac{48989,79^2}{48989,79 \cdot 7} = 6998,54 \Omega
-\end{equation}
-Then the current through $R_{H+F}$ is
-
-\begin{equation}
-    I_{R_{H+F}} = \frac{U_1}{R_{H+F}} = \frac{48989,79}{6998,54} = 7 A
-\end{equation}
-The current through $X_\mu$ can be calculated by 
-
-\begin{equation}
-    \|I_{\mu}\| = \sqrt{{I_1}^2 - {I_{R_{H+F}}}^2}
-\end{equation}
-Then the parameter $X_\mu$ is
-
-\begin{equation}
-    X_\mu = \frac{\|U_1\|}{\|I_{\mu}\|} = ... \Omega
-\end{equation}
-
-Knowing the imaginary part of the power, this parameter could also be calculated by 
-\begin{equation}
-   Q_v = \frac{U_1^2}{X_{\mu}}
-\end{equation}
-
-\subsubsection{Short-circuit test}
-This test is used to determine the copper loss that occurs on the windings at full load. In practice, it is done by fixing the resistance of the secondary side as close to zero as possible. In this case, $I_{cc} = I_1 = 273 A$. The equivalent resistance (in sum) are computed by
-\begin{equation}
-P_{cc} = (R_1 + R_2') \cdot I_{cc}^2
-\end{equation}
-Where $I_{cc}$ is the short circuit current (thus maximal nominal current) and has been calculated previously. Then, we have
-
-\begin{equation}
-    R_1 + R_2' = \frac{P_{cc}}{{I_1}^2} = \frac{48989,79 \cdot 192,45}{192,45^2} = 246,35 \Omega
-\end{equation}
-Finally, the sum of leakage reactance are computed by
-\begin{equation}
-Q_{cc} = (X_1 + X_2') \cdot I_1^2 \iff X_1 + X_2' = \frac{Q_{cc}}{I_1^2}
-\end{equation}
-
-Where the reactive power is given by
-
-\begin{equation}
-    Q = \sqrt{(U_1 \cdot I_1)^2-P^2} = \sqrt{(U_1 \cdot I_1)^2-P^2} = .. var
-\end{equation}
-
-\begin{equation}
-    \iff X_1 + X_2' = \frac{Q}{I_1^2} = ... \Omega
-\end{equation}
-
-Other values of these parameters for shell-type design have been computed in a similar way and are displayed on Tab.\ref{tab:equivalent_parameters}.
+\begin{subequations}
+\setstretch{1}
+   \begin{equation}
+        P_{cc} = R\cdot I_{cc}^2\label{eq:cc_P}
+   \end{equation}
+   \begin{equation}
+        Q_{cc} = X\cdot I_{cc}^2\label{eq:cc_Q}
+   \end{equation}
+\end{subequations}
+As for the previous test, average values have been computed to only consider one equivalent model for each three phases. To approach a short-circuit, a value of 1e-6$\Omega$ for the load have been taken. The results are in Table \ref{tab: cc_result}.
 
 \begin{table}[h]
-    \centering
+\centering
 \begin{tabular}{l|ll|ll}
-\textbf{Design}                            & \multicolumn{2}{c|}{\textbf{Core}} & \multicolumn{2}{c}{\textbf{Shell}} \\
-\textbf{Type}      &     A & B & A & B\\
-$R_{H+F}$ [$\Omega$] & & 6998,54 & & \\
-$X_\mu$ [$\Omega$] & & & & \\
-$R_1 + R_2'$ [$\Omega$] & & 246,35 & & \\
-$X_1 + X_2'$ [$\Omega$] & & & & \\
-           
-
+\textbf{Type}      & \multicolumn{2}{c|}{A}         & \multicolumn{2}{c}{B}         \\ \hline
+\textbf{Design}    & \textbf{Core} & \textbf{Shell} & \textbf{Core} & \textbf{Shell} \\
+$R$ [$\Omega$]   & 11.46     & 11.50      & 2.35     & 7.07 \\
+$X$ [$\Omega$] & 40.50     & 44.87      & 183.74      & 179.75    
 \end{tabular}
-    \caption{Parameters of the equivalent circuit of the three-phase transformers}
-    \label{tab:equivalent_parameters}
+\caption{Short-circuit test - Results}
+\label{tab: cc_result}
 \end{table}
-%%%%%
-% Knowing the value of the losses, the efficiency of the transformers can be calculated using 
-% \begin{equation}
-%   \eta = \frac{P_{output} [kW]}{P_{input} [kW]}
-% \end{equation}
-%%%%
 
-\subsubsection{Exterior characteristic}
-We can now draw the U-I characteristic for each transformer by varying the charge connected to the secondary side, as shown in the graph below.
+The test prove that the impedance value of the branch shunt is really big compared to the series resistance and reactance. Indeed, the shunt reactance are at least 1000 times bigger than the leakage reactance, and the shunt resistance $R_E$ is 1 million times bigger than the resistance $R$.
 
-\textcolor{red}{Tracer le graphe de $U$ en fonction de $I$ pour les deux types}
+This means that in normal operation, almost all the power will flow from the primary to the secondary side without going through the branch shunt.
 
-\section{Additional parametric studies}
+Thanks to these two tests, the equivalent circuit for each transformer can be derived. As explained earlier, this circuit can serve as a base model to numerical study the behaviour of the transformer without considering all the electromagnetic effects.
 
-In this section, the influence of a few parameters on the efficiency of the three-phase transformer will be studied.
+\section{Exterior characteristic}
+\quad\, The previous section shows the derivation of the equivalent circuit for each of the four transformers. An other interesting analysis is to draw the exterior characteristic of the transformer. Considering a varying load at the secondary of the transformer, the exterior characteristic shows the relation between the voltage $U_2$ at the terminal of the load and the current $I_2$ flowing through the load.
 
-\subsection{Effect of the winding electric resistivity}
-According to Pouillet's law (eq. \ref{eq:pouillet}), we know that increasing the winding electric resistivity will increase the resistance as well and thus decrease the intensity of the currents :
+Here, the load is purely resistive. So, it is expected that the curve will be a straight line for both transformer since $U_2$ and $I_2$ are linked through the linear relation
 
 \begin{equation}
-    R = \rho \cdot \frac{l}{S}
+    \setstretch{1}
+    U_2 = R_{load}\cdot I_2
+\end{equation}
+
+The obtained curves for the transformers \textbf{A} and \textbf{B} are given in Figures \ref{fig:UIA} and \ref{fig:UIB}.
+\begin{figure}[h]
+     \centering
+     \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{UI_char/UI_char_A_shell.png}
+         \caption{Transformer \textbf{A}}
+         \label{fig:UIA}
+     \end{subfigure}\hfill
+     \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{UI_char/UI_char_B_shell.png}
+         \caption{Transformer \textbf{B}}
+         \label{fig:UIB}
+     \end{subfigure}
+     
+        \caption{External characteristic}
+        \label{fig:External characteristic}
+\end{figure}
+
+These curves have been obtained considering a load going from 1k$\Omega$ to 1m$\Omega$. The linear dependency between voltage and current has been proven through the simulation. Also, it can be seen that for a high resistance $R_{load}$, the voltage at the secondary corresponds to the nominal voltage.
+
+
+\chapter{Parametric studies}
+\quad\, In the previous chapter, the design of the transformer have been realized using Gmsh and Getdp. Four geometries have been retained for which the nominal specifications are validated.
+
+Now, parametric studies will be presented to observe how the transformer behave when changing one parameters. 
+To avoid having too much graph to analyze, only the shell configurations for both transformers \textbf{A} and \textbf{B} will be considered. 
+
+\section{Electric conductivity of the windings}
+\quad\, The first parametric study to be considering is the influence of the winding resistivity on the performance of the transformers. Based on some charts, it has been decided to make the conductivity $\sigma$ varies from $6.3e7$S/m (silver conductivity) to $1.45e6$S/m (stainless steel conductivity). The copper conductivity (material used for the design) is around $1e7$S/m.
+
+According to the Pouillet's law (\ref{eq:pouillet}), it can be found that the resistance is inversely proportional to the conductivity 
+
+\begin{equation}
+    R = \frac{1}{\sigma} \cdot \frac{L}{S}
     \label{eq:pouillet}
 \end{equation}
-where 
-\begin{itemize}
-    \item $\rho$ is the electric resistivity of the conductor, which is $2 \cdot 10^{-8} \Omega \cdot m$ for the copper
-    \item L its length 
-    \item S its cross-section area
-\end{itemize}
+where L is the length of the winding and is its cross-section area. 
 
-Efficiency can now be plotted over $\rho$ as a secondary variable, by increasing the electric resistivity (for higher temperatures of the conductor, for example).\\
+Considering a load of 100$\Omega$, Figure \ref{fig:param_sigma_second} shows the evolution of the current at the secondary side when varying the conductivity.
 
-\textcolor{red}{Tracer le graphe de $\eta$ en fonction de $\rho$}
+\begin{figure}[h]
+     \centering
+     \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{Param_Study/Isigma2_char_A_shell_sigma.png}
+         \caption{Transformer \textbf{A}}
+         \label{fig:sigma2 - A}
+     \end{subfigure}\hfill
+     \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{Param_Study/Isigma2_char_B_shell_sigma.png}
+         \caption{Transformer \textbf{B}}
+         \label{fig:sigma2 - B}
+     \end{subfigure}
+     
+        \caption{Current vs conductivity - secondary side}
+        \label{fig:param_sigma_second}
+\end{figure}
 
-We can also compute the $I^2R$ component of conductor losses for higher electric resistivity which leads to bigger copper losses.
-
-\subsection{Effect of the core magnetic permeability}
+The graphs shows that the current is inversely proportional to the conductivity. This is logical since the applied load at the secondary is purely resistive.
+\newpage
+\subsection{Magnetic permeability of the core}
+\quad\, The second study consists in seeing the influence of the core magnetic permeability on the currents flowing through the branches of the transformer
 Varying the magnetic permeability has a big impact on the efficiency of the transformer. Indeed, a higher permeability induces a higher efficiency since the field lines are better canalized in the materials, and less losses occur. This figure also confirms that the actual value of magnetic permeability is a good trade-off.
 
 \textcolor{red}{Tracer le graphe de $\eta$ en fonction de $\mu$ + de là, sélectionner un matériau avec un bon $\mu$}
